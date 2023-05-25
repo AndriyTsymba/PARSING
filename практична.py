@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-response = requests.get("https://uk.wikipedia.org/")
+response = requests.get("https://www.example.com/")
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.content , "html.parser")
-    img = soup.find_all("img")
-    for i in img:
-        print("https://" + i["src"])
-
+    title = soup.find("title").text
+    print(title)
+else:
+    print("No connection",response.status_code)
