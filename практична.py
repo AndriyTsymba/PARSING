@@ -1,11 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
-response = requests.get("https://www.example.com/")
+response = requests.get("https://uk.wikipedia.org/")
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.content , "html.parser")
-    title = soup.find("title").text
-    print(title)
-else:
-    print("No connection",response.status_code)
+    soup_list = soup.find_all("a")
+    for link in soup_list:
+        href = link.get("href")
+        print(href)
+        if href.startwith("https://"):
+            print(href)
